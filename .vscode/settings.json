@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "atmPlantCanopyTSource.C": "cpp",
+        "atmPlantCanopyMoistureSource.C": "cpp",
+        "buoyantBoussinesqSimpleFoamV2.C": "cpp",
+        "buoyantBoussinesqSimpleFoamV3.C": "cpp"
+    }
+}
