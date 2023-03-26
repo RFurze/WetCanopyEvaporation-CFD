@@ -1,0 +1,97 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    p_rgh
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-15;
+        relTol          0.1;
+        maxIter         10;
+    }
+    
+    p_rghFinal
+    {
+        $p_rgh;
+        relTol          0;
+    }
+    
+    s
+    {
+    solver          PBiCGStab;
+    preconditioner  DILU;
+    tolerance       1e-08;
+    relTol          0;
+    minIter	     1;
+    }
+
+    "(U|k|epsilon|omega|R)"
+    {
+        solver          PBiCG;
+        preconditioner  DILU;
+        tolerance       1e-12;
+        relTol          0.1;
+    }
+
+    T
+    {
+        solver          PBiCG;
+        preconditioner  DILU;
+        tolerance       1e-15;
+        relTol          0.1;
+        maxIter         10;
+    }
+    
+	
+    "(U|T|k|epsilon|omega|R)Final"
+    {
+        $U;
+        relTol          0;
+    }
+
+}
+
+PIMPLE
+{
+    momentumPredictor no;
+    nOuterCorrectors 1;
+    nCorrectors     2;
+    nNonOrthogonalCorrectors 0;
+    pRefCell        0;
+    pRefValue       0;
+}
+relaxationFactors
+{
+    fields
+    {
+        p_rgh           0.15;
+    }
+    equations
+    {
+        "(U|T|k|epsilon|omega|R)" 0.3;
+        "(U|T|k|epsilon|omega|R)Final" 0.3;
+    }
+}
+
+cache
+{
+    grad(U);
+}
+
+
+// ************************************************************************* //

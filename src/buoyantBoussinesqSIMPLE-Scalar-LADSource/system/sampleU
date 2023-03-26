@@ -1,0 +1,45 @@
+// -*- C++ -*-
+
+type                sets;
+libs                (sampling);
+interpolationScheme cellPoint;
+setFormat           raw;
+
+writeControl        writeTime;
+
+fields
+(
+    U
+);
+
+sets
+{
+    lineZ1
+    {
+        type        midPoint;
+        axis        z;
+        start       (0 0 0);
+        end         (0 0 6);
+        nPoints     200;
+    }
+    lineZ2
+    {
+        type        uniform;
+        axis        z;
+        start       (3 0 0);
+        end         (3 0 6);
+        nPoints     200;
+    }
+    lineZ3
+    {
+        type        uniform;
+        axis        z;
+        start       (6 0 0);
+        end         (6 0 6);
+        nPoints     200;
+    }
+    
+}
+
+
+// *********************************************************************** //
