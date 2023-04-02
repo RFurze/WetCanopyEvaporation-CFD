@@ -1,0 +1,107 @@
+a/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+defaultFieldValues
+(
+    volScalarFieldValue qPlant 0
+    volScalarFieldValue Cd 0
+    volScalarFieldValue LAD 0
+    volScalarFieldValue Moisture 0
+);
+
+regions
+(
+    boxToCell
+    {
+        box (144 0 0) (288 144 7.5);
+        fieldValues
+        (
+            volScalarFieldValue qPlant -9
+        );
+    }
+    
+    boxToCell
+    {
+        box (144 0 0) (288 96 7.5);
+        fieldValues
+        (
+            volScalarFieldValue Moisture 1
+        );
+    }
+    
+    boxToCell
+    {
+        box (144 0 0) (288 144 1.5);
+        fieldValues
+        (
+            volScalarFieldValue Cd 0.2
+            volScalarFieldValue LAD 0.1
+        );
+    }
+
+   boxToCell
+    {
+        box (144 0 1.5) (288 144 3.0);
+        fieldValues
+        (
+            volScalarFieldValue Cd 0.2
+            volScalarFieldValue LAD 0.21
+        );
+    }
+
+   boxToCell
+    {
+        box (144 0 3.0) (288 144 4.5);
+        fieldValues
+        (
+            volScalarFieldValue Cd 0.2
+            volScalarFieldValue LAD 0.37
+        );
+    }
+
+   boxToCell
+    {
+        box (144 0 4.5) (288 144 6.0);
+        fieldValues
+        (
+            volScalarFieldValue Cd 0.2
+            volScalarFieldValue LAD 0.39
+        );
+    }
+    
+   boxToCell
+    {
+        box (144 0 6.0) (288 144 7.5);
+        fieldValues
+        (
+            volScalarFieldValue Cd 0.2
+            volScalarFieldValue LAD 0.25
+        );
+    }
+
+    patchToFace
+    {
+        patch                    bottom;
+        fieldValues
+        (
+            volScalarFieldValue Cd 0.2
+            volScalarFieldValue LAD 0.1
+        );
+    }
+);
+
+
+// ************************************************************************* //

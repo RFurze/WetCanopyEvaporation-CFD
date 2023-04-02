@@ -1,0 +1,84 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2212                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       volScalarField;
+    location    "0";
+    object      T;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 1 0 0 0];
+
+internalField   uniform 283;
+
+boundaryField
+{
+    top
+    {
+        type            fixedValue;
+        value           uniform 283;
+    }
+    bottom
+    {
+        type            atmTurbulentHeatFluxTemperature;
+        gradient        nonuniform List<scalar> 0();
+        heatSource      flux;
+        alphaEff        alphaEff;
+        Cp0             constant 1005;
+        q               constant 0;
+        value           nonuniform List<scalar> 0();
+    }
+    inlet
+    {
+        type            cyclic;
+    }
+    outlet
+    {
+        type            cyclic;
+    }
+    left
+    {
+        type            cyclic;
+    }
+    right
+    {
+        type            cyclic;
+    }
+    procBoundary4to2
+    {
+        type            processor;
+        value           uniform 283;
+    }
+    procBoundary4to2throughleft
+    {
+        type            processorCyclic;
+        value           uniform 283;
+    }
+    procBoundary4to3
+    {
+        type            processor;
+        value           uniform 283;
+    }
+    procBoundary4to5
+    {
+        type            processor;
+        value           uniform 283;
+    }
+    procBoundary4to5throughinlet
+    {
+        type            processorCyclic;
+        value           uniform 283;
+    }
+}
+
+
+// ************************************************************************* //
