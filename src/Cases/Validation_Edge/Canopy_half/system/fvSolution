@@ -62,7 +62,8 @@ relaxationFactors
         k               0.3;
         omega           0.3;
         epsilon         0.3;
-        T               0.015;
+        T               0.1;
+        Moisture        0.9;
     }
 }
 
